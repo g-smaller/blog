@@ -33,32 +33,16 @@ tags:
 
 有关Node管理工具的介绍：http://weizhifeng.net/node-version-management-via-n-and-nvm.html
 
-以下是使用Mac brew安装的
-
-安装[`brew`](https://brew.sh)
+通过脚步安装
 
 ```bash
-$ brew install nvm
-$ ln -s /usr/local/Cellar/nvm/$version ~/.nvm
+$ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
 ```
-
-> $version 是nvm安装版本
-
-##### 设置环境
-
->添加配置到`~/bash_profile` `~/.zshrc` `~/.profile` `~/j.bashrc` 四个文件其中任意一个
-
-> 我使用的shell是[`zsh`](http://ohmyz.sh)
+or
 
 ```bash
-$ vim .zshrc
-
-## 把以下脚本添加到文件末尾
-export NVM_DIR="~/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
+$ wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
 ```
-
-> 编辑完成不要忘记 `source .zshrc`
 
 #### 安装`Node.js`
 
@@ -68,18 +52,20 @@ nvm install stable
 
 安装成功运行 `node` 如果出现控制台，说明安装成功；如果出现`zsh: command not found: node`，运行`nvm use 8.3.0` 其中8.3.0是我本地安装Node的版本；
 
+以下的提示是我使用`brew`安装`nvm`，使用`nvm`安装Node报的错误。
+[issue](https://github.com/creationix/nvm/issues/855)
+如果你遇到了以下错误，请使用脚步安装`nvm`
 ```
 nvm is not compatible with the npm config "prefix" option: currently set to "/usr/local/Cellar/nvm/0.33.2/versions/node/v8.3.0"
 Run `nvm use --delete-prefix v8.3.0` to unset it.
 ```
-如果出现这种问题， 按提示运行 `nvm use --delete-prefix v8.3.0`
+[正确的安装和使用nvm(Mac)](http://www.imooc.com/article/14617)
 
-1. 出现提示信息：`Now using node v8.3.0 (npm v5.3.0)` 
-
-2. 运行 `nvm current` ， 出现 `v8.3.0` 
-
-> 运行脚本出现提示信息，Node环境配置成功
-
+验证
+```bash
+$ nvm current
+v8.3.0
+```
 
 #### 安装`Hexo`
 
@@ -93,7 +79,6 @@ $ npm install -g hexo-cli
 ```bash
 $ npm config set registry https://registry.npm.taobao.org
 ```
-
 
 ### 搭建博客
 
