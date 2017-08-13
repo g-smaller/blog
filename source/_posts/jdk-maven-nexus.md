@@ -1,6 +1,10 @@
 ---
 title: Java Maven Nexus 环境搭建
 date: 2017-08-12 14:15:19
+categories:
+- jdk
+- maven
+- nexus
 tags:
 - jdk
 - maven

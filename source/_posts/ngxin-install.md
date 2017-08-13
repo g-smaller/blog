@@ -3,7 +3,6 @@ title: Nginx 编译安装
 date: 2017-08-12 13:39:18
 categories:
 - nginx
-- ubuntu
 tags:
 - nginx
 - ubuntu

@@ -1,35 +1,37 @@
 ---
 title: awk
 date: 2017-08-12 17:53:35
+categories:
+- linux
+- awk
 tags:
 - awk
 - linux
 ---
 
-## awk
 
-**awk命令的基本格式**
+### awk命令的基本格式
 > awk [options] 'program' file
 
 - options 这个表示一些可选的参数选项
 - program 这个表示 awk 的可执行脚本代码，这个是必须要有的
 - file 这个表示 awk 需要处理的文件，注意是纯文本文件
 
-**例子**
+例子
 > awk '{print $0}' /etc/passwd
 
 awk 命令的可执行脚本代码使用单引号括起来，紧接着里面是一对花括号,然后花括号里面就是一些可执行的脚本代码段,当 awk 每读取一行之后，它会依次执行双引号里面的每个脚本代码段，在上面这个例子中， $0 表示当前行;当你执行了上面的命令之后，它会依次将 /etc/passwd 文件的每一行内容打印输出，你一定在想：这有个毛用，用 cat 命令也能搞定。
 
 <!--more-->
 
-**awk 自定义分隔符**
+### awk 自定义分隔符
 
 awk 默认的分割符为空格和制表符，我们可以使用 `-F` 参数来指定分隔符
 > awk -F ':' '{print $1}' /etc/passwd
 
 上面的命令将 /etc/passwd 文件中的每一行用冒号 : 分割成多个字段，然后用 print 将第 1 列字段的内容打印输出
 
-**如何同时指定多个分隔符**
+### 如何同时指定多个分隔符
 
 例如一个文件info.log的内容如下
 
@@ -47,7 +49,7 @@ nectarine(200g)2008
 
 在 -F 参数中使用一对方括号来指定多个分隔符，awk 处理 info.log 文件时就会使用 “(” 和 “)” 来对文件的每一行进行分割。
 
-**awk 内置变量**
+### awk 内置变量
 - $0 表示文本处理时的当前行
 - $1 表示文本行被分隔后的第 1 个字段列
 - $2 表示文本行被分隔后的第 2 个字段列
@@ -67,31 +69,31 @@ Pear     240   Mar  1990   Janpan
 avocado  120   Feb  2008   china
 ```
 
-**打印输出文件的每一行的第 1 列、第 2 列和第 3 列内容**
+#### 打印输出文件的每一行的第 1 列、第 2 列和第 3 列内容
 > awk '{print $1, $2, $3}' fruit.txt
 
 其中加入的逗号表示插入输出分隔符，也就是默认的空格。
 
-**文件的每一行的每一列的内容除了可以用 print 命令打印输出以外，还可以对其进行赋值**
+#### 文件的每一行的每一列的内容除了可以用 print 命令打印输出以外，还可以对其进行赋值
 
 > awk '{$2 = "***"; print $0}' fruit.txt
 
 通过对 $2 变量进行重新赋值，来隐藏每一行的第 2 列内容，并且用星号 * 来代替其输出
 
-**在参数列表中加入一些字符串或者转义字符之类的东东**
+#### 在参数列表中加入一些字符串或者转义字符之类的东东
 
 > awk '{print $1 "\t" $2 "\t" $3}' fruit.txt
 
 可以在 print的参数列表中加入一些字符串或者转义字符之类的东东，让输出的内容格式更漂亮，但一定要记住要使用双引号。
 
-**awk 内置 NR 变量表示每一行的行号**
+#### awk 内置 NR 变量表示每一行的行号
 
 > awk '{print NR "\t" $0}' fruit.txt
 
 **awk 内置 NF 变量表示每一行的列数**
 > awk '{print NF "\t" $0}' fruit.txt
 
-**awk 中 $NF 变量的使用**
+#### awk 中 $NF 变量的使用
 > awk '{print $NF}' fruit.txt
 
 上面这个 $NF 就表示每一行的最后一列，因为 NF 表示一行的总列数，在这个文件里表示有 5 列，然后在其前面加上 $ 符号，就变成了 $5 ，表示第 5 列
@@ -104,7 +106,10 @@ avocado  120   Feb  2008   china
 
 > company.txt fji
 
-**BEGIN 关键字的使用**
+
+### awk 其它操作
+
+#### BEGIN 关键字的使用
 如果在脚步代码段前面使用BEGIN关键字，它会在开始读取一个文件之前，运行一次BEGIN关键字后面的脚步代码，而且只会执行一次；
 > awk 'BEGIN {print "Start read file"}' /etc/passwd
 
@@ -112,7 +117,7 @@ avocado  120   Feb  2008   china
 
 > awk 'BEGIN {print "Start read file"} {print $0}' /etc/passwd
 
-**END 关键字使用方法**
+#### END 关键字使用方法**
 
 awk 的 END 指令和 BEGIN 恰好相反，在 awk 读取并且处理完文件的所有内容行之后，才会执行 END 后面的脚本代码段
 
@@ -120,7 +125,7 @@ awk 的 END 指令和 BEGIN 恰好相反，在 awk 读取并且处理完文件�
 
 > $ awk 'BEGIN {print "Start read file"} {print $0} END {print "End file"}' /etc/passwd
 
-**在 awk 中使用变量**
+#### 在 awk 中使用变量
 
 可以在awk脚步中声明和使用变量
 > awk '{msg="Hello Word"; print msg}' /etc/passwd
@@ -128,7 +133,7 @@ awk 的 END 指令和 BEGIN 恰好相反，在 awk 读取并且处理完文件�
 awk 声明的变量可以在任何多个花括号脚本中使用
 > awk 'BEGIN {msg="hello world"} {print msg}' /etc/passwd
 
-**在 awk 中使用数学运算**
+#### 在 awk 中使用数学运算
 > awk '{a = 12; b = 24; print a + b}' company.txt
 
 **awk 还支持其他的数学运算符**
@@ -139,7 +144,7 @@ awk 声明的变量可以在任何多个花括号脚本中使用
 - `/` 除法运算符
 - `%` 取余运算符
 
-**在 awk 中使用条件判断**
+#### 在 awk 中使用条件判断
 比如有一个文件 company.txt 内容如下
 ```
 yahoo   100 4500
@@ -166,7 +171,7 @@ twitter 120 5000
 
 > awk '{if ($3 < 5500) print $0}' company.txt
 
-**在 awk 中使用正则表达式**
+#### 在 awk 中使用正则表达式
 
 使用正则表达式匹配字符串 “There” ，将包含这个字符串的行打印并输出
 

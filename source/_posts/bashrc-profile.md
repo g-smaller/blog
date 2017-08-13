@@ -1,6 +1,9 @@
 ---
 title: 理解 bashrc & profile
 date: 2017-08-12 16:47:03
+categories:
+- bashrc
+- profile
 tags:
 - bashrc
 - profile

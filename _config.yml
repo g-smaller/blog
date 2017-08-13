@@ -6,9 +6,10 @@
 title: 矅日
 subtitle: 毛毛
 description: 技术积累
-author: guoqy
+author: Guoqy
 email: g.smaller118@gmail.com
-language: zh-CN
+#language: zh-Hans
+language: zh-hk
 timezone: Asia/Shanghai
 
 # URL
@@ -35,7 +36,7 @@ titlecase: false # Transform title into titlecase
 external_link: true # Open external links in new tab
 filename_case: 0
 render_drafts: false
-post_asset_folder: false
+post_asset_folder: true
 relative_link: false
 future: true
 highlight:
