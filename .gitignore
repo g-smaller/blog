@@ -6,5 +6,5 @@ node_modules/
 public/
 .deploy*/
 themes/**
-!themes/NexT/**
 *lock.json
+!themes/NexT/**
