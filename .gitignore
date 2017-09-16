@@ -2,9 +2,9 @@
 Thumbs.db
 db.json
 *.log
+*lock.json
 node_modules/
 public/
 .deploy*/
-themes/**
-!themes/NexT/**
-*lock.json
+/themes
+!/themes/NexT
