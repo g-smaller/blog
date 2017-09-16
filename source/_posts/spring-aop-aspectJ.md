@@ -24,6 +24,45 @@ Spring 支持AspectJ的注解式切面编程。
 - 其中符合条件的每一个拦截处为连接点(JoinPoint)
 <!--more-->
 
+[使用Spring进行面向切面编程（AOP）](http://man.lupaworld.com/content/develop/spring_ref/2.0/html/aop.html)
+
+### 切点
+#### execution()
+> 格式`execution(<修饰符模式>? <返回类型模式> <方法名模式>(<参数模式>) <异常模式>?)`
+> 除了返回类型模式、方法名模式和参数模式外，其它项都是可选的
+
+例子：execution(* com.keng.web.test.spring..*.*Service.*(..))
+
+- execution()
+	> 表达式主体
+- 第一个`*`号
+	> 表示返回类型，`*`号表示所有的类型
+- 包名
+	> 表示需要拦截的包名，后面的两个点`..`表示当前包和当前包的所有子包；
+- 第二个`*`号		
+	> 表示类名，`*`号表示所有类；上面的表达式表示已`Service`结尾的类
+- *(..)
+	> 最后的表达式星号`*`表示方法名，括号里面表示方法的参数，连个点`..`表示任何参数
+
+#### 定义切点详解
+- `execution(public * *(..))`
+	> 匹配所有目标类的public方法
+- `execution(* *Dao(..))`
+	> 匹配目标所有以Dao为后缀的方法
+- ` execution(* com..*.*Dao.find*(..))`
+	> 匹配com包下以及子包下以`Dao`为结尾，以`find`为前缀的方法；
+- `execution(* com.Animal.*(..))`
+	> 匹配`Animal`接口以及所有实现类的方法；
+- `execution(* com.Animal+.*(..))`
+	> 不仅匹配`Animal`接口以及所有实现类的方法；还匹配实现类自定义的方法。
+- `execution(* invoke(String,int)))`
+	> 匹配joke(String,int)方法，且joke()方法的第一个入参是String，第二个入参是int;
+	> 如果方法中的入参类型是java.lang包下的类，可以直接使用类名，否则必须使用全限定类名，如joke(java.util.List,int)；
+- `execution(* invoke(String,..)))`
+	> 匹配目标类中的invoke()方法，该方法第 一个入参为String，后面可以有任意个入参且入参类型不限;
+- `execution(* invoke(Object+)))`
+	> 匹配目标类中的invoke()方法，方法拥有一个入参，且入参是Object类型或该类的子类。它匹配invoke(String s1)和invoke(Client c)。如果我们定义的切点是execution(* joke(Object))，则只匹配invoke(Object object)而不匹配invoke(String cc)或invoke(Client c)。
+
 ### 添加依赖
 
 ```
@@ -172,7 +211,7 @@ public class LogAspect {
 
     private Logger LOGGER = LoggerFactory.getLogger(getClass());
 
-    @Before("execution(* com.keng.web.test.spring.*.*Service.*(..))")
+    @Before("execution(* com.keng.web.test.spring..*.*Service.*(..))")
     public void before(JoinPoint joinPoint) {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
 
@@ -184,6 +223,7 @@ public class LogAspect {
 }
 
 ```
+
 
 ### 拦截类注解说明
 
