@@ -6,6 +6,6 @@ db.json
 node_modules/
 public/
 .deploy*/
-!/themes
-/themes/*
-!/themes/NexT
+!themes/
+themes/*
+!themes/NexT/
