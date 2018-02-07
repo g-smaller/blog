@@ -4,5 +4,6 @@ db.json
 *.log
 *lock.json
 node_modules/
+themes/
 public/
 .deploy*/
