@@ -4,9 +4,9 @@ db.json
 *.log
 package-lock.json
 node_modules/
+themes/
 public/
-.gitmodules
-
-
 themes/NexT/
 themes/
+themes/
+.deploy*/

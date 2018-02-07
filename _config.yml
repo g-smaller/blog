@@ -15,8 +15,8 @@ timezone: Asia/Shanghai
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: http://siblings.top
-root: /keng
-permalink: :year/:month/:day/:title/
+root: /
+permalink: :year/:month/:day/:id/
 permalink_defaults:
 
 # Directory

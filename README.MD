@@ -2,7 +2,7 @@
 
 
 ##### 关联子模块
-> git submodule add git@github.com:username/hexo-theme-next.git themes/NexT
+> git submodule add [-b keng-customer] git@github.com:username/hexo-theme-next.git themes/NexT
 
 ##### 切换分支
 

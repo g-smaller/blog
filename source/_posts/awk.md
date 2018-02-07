@@ -1,6 +1,7 @@
 ---
 title: awk
 date: 2017-08-12 17:53:35
+type: 'tags'
 categories:
 - linux
 - awk
